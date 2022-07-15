@@ -1,0 +1,13 @@
+.posts {
+	padding-left: 30px;
+	padding-top: 30px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+}
+.btn {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #fff;
+	background-color: #50b5ff;
+	border-color: #50b5ff;
+}

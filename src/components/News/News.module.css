@@ -1,0 +1,40 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.item {
+	font-family: sans-serif;
+	font-size: 40px;
+	width: 100%;
+	min-height: 100vh;
+}
+.container {
+	border: solid 1px rgb(221, 63, 63);
+	background-color: skyblue;
+	/* Размещаем контейнеры по центру */
+	display: grid;
+	gap: 20px;
+	height: 100vh;
+
+	grid-template-areas:
+		'A A A A   A A A A   A A A A'
+		'B B B B   B B B B   B B C C'
+		'B B B B   B B B B   B B C C';
+}
+
+.box_1 {
+	grid-area: A;
+	border: solid 1px #fff;
+	justify-self: center;
+	align-self: center;
+}
+.box_2 {
+	grid-area: B;
+	border: solid 1px #fff;
+}
+.box_3 {
+	/* grid-area: C; */
+	border: solid 1px #fff;
+	grid-area: C;
+}

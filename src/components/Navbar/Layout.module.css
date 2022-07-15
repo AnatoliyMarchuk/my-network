@@ -1,0 +1,42 @@
+.nav {
+	box-shadow: 0 0 1.25rem 0 rgb(0 0 0 / 10%);
+	top: 4.688rem;
+	width: auto;
+	height: 100%;
+	background: #fff;
+	transition: all 0.3s ease-in-out;
+	/* border: 1px solid #000; */
+}
+.nav a {
+	margin-bottom: 20px auto;
+	display: block;
+	text-decoration: none;
+	color: #50b5ff;
+}
+.item {
+	color: rgb(15, 15, 15);
+	margin: 10px 10px 10px 10px;
+}
+
+.item_Active {
+	color: rgb(212, 119, 32);
+	font-size: 20px;
+	margin-left: 20px;
+}
+.main {
+	display: grid;
+	justify-self: center;
+	width: 80%;
+
+	border-radius: 5px;
+
+	box-shadow: 0 0 1.25rem 0 rgb(0 0 0 / 10%);
+
+	/* border: 1px solid #000; */
+}
+.footer {
+	grid-column-start: span 2;
+	/* border: 1px solid #000; */
+
+	text-align: center;
+}

@@ -1,0 +1,11 @@
+.wrapper {
+	display: grid;
+	grid-template-rows: 80px auto;
+	row-gap: 5px;
+	margin-left: auto;
+	text-align: center;
+}
+.content {
+	display: flex;
+	text-align: center;
+}

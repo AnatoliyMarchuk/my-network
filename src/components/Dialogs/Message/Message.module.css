@@ -1,0 +1,27 @@
+.message {
+	font-size: 18px;
+	border: solid #777d74;
+	box-shadow: 0 0 1.25rem 0 rgb(0 0 0 / 10%);
+	margin-bottom: 1rem;
+	border-radius: 5px;
+	position: relative;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 0 solid rgba(0, 0, 0, 0.125);
+	border-radius: 5px;
+	margin: 10px;
+}
+/* .btn {
+	font-size: medium;
+} */
+.item_area {
+	text-align: center;
+}

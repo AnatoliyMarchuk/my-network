@@ -1,0 +1,14 @@
+/* .wrapper {
+	display: grid;
+} */
+.wrapper .name {
+	text-align: center;
+}
+
+.wrapper img {
+	vertical-align: middle;
+	max-width: 50%;
+	height: auto;
+	border-radius: 30px;
+	margin-left: 10px;
+}

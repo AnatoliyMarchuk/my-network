@@ -1,0 +1,9 @@
+.item {
+	color: rgb(85, 50, 211);
+}
+.item img {
+	max-width: 75px;
+	max-height: 75px;
+	border-radius: 25px;
+	display: block;
+}

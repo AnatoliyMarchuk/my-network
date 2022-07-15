@@ -1,0 +1,19 @@
+.dialog {
+	font-size: 20px;
+	display: block;
+	text-decoration: none;
+	color: #50b5ff;
+}
+.dialog_Active {
+	font-size: 20px;
+	color: #adb5bd;
+	text-decoration: none;
+}
+.dialog img {
+	margin-top: 10px;
+	display: block;
+	height: 80px;
+	width: 80px;
+	border-radius: 30px;
+	padding-top: 10px;
+}
