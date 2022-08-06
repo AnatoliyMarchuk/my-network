@@ -40,17 +40,34 @@ const usersReducer = (state = initialState, action: any): initialStateType => {
 			return state;
 	}
 };
-type setAuthUserDataPayloadType = {
+type SetAuthUserDataPayloadType = {
 	userId: number;
 	email: string;
 	login: string;
 	isAuth: boolean;
+	captchaUrl?: string;
+};
+
+type SetUserProfilePhotoPayloadType = {
+	profilePhoto: string | null;
+};
+type GetCaptchaUrlSuccessPayloadType = {
 	captchaUrl: string;
 };
 
-type setAuthUserDataActionType = {
+type SetAuthUserDataActionType = {
 	type: typeof SET_USER_DATA;
-	payload: setAuthUserDataPayloadType;
+	payload: SetAuthUserDataPayloadType;
+};
+
+type SetUserProfilePhotoActionType = {
+	type: typeof SET_USER_PROFILE_PHOTO;
+	payload: SetUserProfilePhotoPayloadType;
+};
+
+type GetCaptchaUrlSuccessType = {
+	type: typeof GET_CAPTCHA_URL_SUCCESS;
+	payload: GetCaptchaUrlSuccessPayloadType;
 };
 
 export const setAuthUserData = (
@@ -58,18 +75,18 @@ export const setAuthUserData = (
 	email: string,
 	login: string,
 	isAuth: boolean,
-	captchaUrl: boolean
-): setAuthUserDataActionType => ({
+	captchaUrl: string
+): SetAuthUserDataActionType => ({
 	type: SET_USER_DATA,
 	payload: { userId, email, login, isAuth, captchaUrl },
 });
-export const setUserProfilePhoto = (profilePhoto) => ({
+export const setUserProfilePhoto = (profilePhoto: string): SetUserProfilePhotoActionType => ({
 	type: SET_USER_PROFILE_PHOTO,
-	profilePhoto,
+	payload: { profilePhoto },
 });
-export const getCaptchaUrlSuccess = (captchaUrl) => ({
+export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessType => ({
 	type: GET_CAPTCHA_URL_SUCCESS,
-	payload: captchaUrl,
+	payload: { captchaUrl },
 });
 
 export const auth = () => {
