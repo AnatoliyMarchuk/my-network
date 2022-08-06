@@ -5,9 +5,10 @@ import smileTrue from '../../../assets/img/smileTrue.png';
 import smileFalse from '../../../assets/img/smileFalse.png';
 import defaultPhoto from '../../../assets/img/AvaDefault.png';
 
-import ProfileStatus from './ProfileStatus';
+// import ProfileStatus from './ProfileStatus';
 import { useState } from 'react';
 import ProfileDataForm from './ProfileDataForm';
+import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 
 export default function ProfileInfo({
 	profile,
@@ -60,7 +61,7 @@ export default function ProfileInfo({
 					) : (
 						<div>
 							<div className={s.status}>
-								<ProfileStatus status={status} updateUserStatus={updateUserStatus} />{' '}
+								<ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus} />{' '}
 								<h2> {profile.fullName}</h2>
 							</div>
 							<ProfileData profile={profile} isOwner={isOwner} goToEditMode={setEditMode} />

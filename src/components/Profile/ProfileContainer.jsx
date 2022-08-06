@@ -15,6 +15,7 @@ import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 // debugger;
+
 class ProfileContainer extends Component {
 	refreshProfile() {
 		let profileId = this.props.router.params.userId;

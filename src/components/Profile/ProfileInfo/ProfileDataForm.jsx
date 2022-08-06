@@ -20,7 +20,6 @@ export default function ProfileDataForm({ initialValues, updateProfile, goToEdit
 	return (
 		<Formik onSubmit={onSubmit} initialValues={initialValues} validationSchema={validationSchema}>
 			{({ status }) => {
-				console.log('Status', status);
 				return (
 					<Form>
 						<div> Start Form this! </div>

@@ -5,25 +5,38 @@ import HomePage from './components/HomePage/HomePage';
 
 import Settings from './components/Settings/Settings';
 import MessagesContainer from './components/Dialogs/MessagesContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
+// import ProfileContainer from './components/Profile/ProfileContainer';
 import Layout from './components/Navbar/Layout';
-import NotfoundPage from './components/NotfoundPage';
+import ErrorPage from './components/ErrorPage';
 import User from './components/Users/User';
 import LoginPage from './components/Login/LoginPage';
 import { connect } from 'react-redux';
-import { initialize } from './redux/appReducer';
+import { globalError, initialize } from './redux/appReducer.ts';
 import Preloader from './commons/loader/Preloader';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainerFC from './components/Profile/functionComponent/ProfileContainerFC';
 
 // import News from '';
 const News = React.lazy(() => import('./components/News/News'));
 // const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 class App extends Component {
+	catchAllUnhandledErrors = (reason, promise) => {
+		console.log('reason', reason, '', reason.message);
+		process.on('unhandledRejection', (reason, promise) => {
+			console.error(`Uncaught error in`, promise);
+		});
+
+		globalError(reason);
+		alert('Some error!!! ');
+	};
+
 	componentDidMount() {
 		this.props.initialize();
-		// debugger;
+		window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
 	}
-	// console.log('app', props);
+	componentWillUnmount() {
+		window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors);
+	}
 	render() {
 		if (!this.props.initialized) {
 			return <Preloader />;
@@ -33,7 +46,7 @@ class App extends Component {
 			<Routes>
 				<Route path='/' element={<Layout />}>
 					<Route index element={<HomePage />} />
-					<Route path='profile/*' element={<ProfileContainer />}>
+					<Route path='profile/*' element={<ProfileContainerFC />}>
 						<Route path=':userId' element={<User />} />
 					</Route>
 					<Route path='dialogs/*' element={<MessagesContainer />} />
@@ -50,7 +63,7 @@ class App extends Component {
 					/>
 					<Route path='login' element={<LoginPage />} />
 					<Route path='settings' element={<Settings />} />
-					<Route path='*' element={<NotfoundPage />} />
+					<Route path='*' element={<ErrorPage />} />
 				</Route>
 			</Routes>
 		);

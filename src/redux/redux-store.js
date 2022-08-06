@@ -5,8 +5,8 @@ import messageReducer from './messageReducer';
 import sidebarReducer from './sidebarReducer';
 import profileReducer from './profileReducer';
 import usersReducer from './usersReducer';
-import authReducer from './authReducer';
-import appReducer from './appReducer';
+import authReducer from './authReducer.ts';
+import appReducer from './appReducer.ts';
 
 let reducers = combineReducers({
 	profilePage: profileReducer,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import s from './Paginator.module.css';
+import cn from 'classnames';
 
 export default function Paginator({
 	totalItemCount,
@@ -44,7 +45,7 @@ export default function Paginator({
 							return (
 								<li
 									key={index}
-									className={` page-item page-link ${currentPage === p ? s.selectedPage : null}`}
+									className={cn('page-item', 'page-link', { [s.selectedPage]: currentPage === p })}
 									onClick={() => {
 										onPageChange(p);
 									}}>

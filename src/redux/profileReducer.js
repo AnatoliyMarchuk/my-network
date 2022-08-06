@@ -98,10 +98,16 @@ export const getUserStatus = (profileId) => {
 };
 export const updateUserStatus = (status) => {
 	return async (dispatch) => {
-		const data = await profileAPI.updateStatus(status);
-		if (data.resultCode === 0) {
-			// debugger;
-			dispatch(setUserStatus(status));
+		try {
+			const data = await profileAPI.updateStatus(status);
+			if (data.resultCode === 0) {
+				// debugger;
+				dispatch(setUserStatus(status));
+			}
+		} catch (error) {
+			alert(error.message);
+			debugger;
+			console.error(error.message);
 		}
 	};
 };

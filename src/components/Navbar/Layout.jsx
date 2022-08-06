@@ -8,8 +8,6 @@ export default function layout() {
 	const setActive = ({ isActive }) => (isActive ? `${s.item_Active}` : `${s.item}`);
 	return (
 		<>
-			{/* >
-			 */}
 			<div className=' app-wrapper-content'>
 				<HeaderContainer />
 				{/* <div className=" app-wrapper-content"> */}

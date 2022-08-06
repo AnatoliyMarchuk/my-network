@@ -4,8 +4,18 @@ const SET_USER_DATA = 'SET_USER_DATA';
 const GET_CAPTCHA_URL_SUCCESS = 'GET_CAPTCHA_URL_SUCCESS';
 const SET_USER_PROFILE_PHOTO = 'SET_USER_PROFILE_PHOTO';
 
+export type initialStateType = {
+	userId: number | null;
+	email: string | null;
+	login: string | null;
+	isAuth: boolean;
+	isFetching: boolean;
+	profilePhoto: string | null;
+	captchaUrl: string | null;
+};
+
 // debugger;
-let initialState = {
+let initialState: initialStateType = {
 	userId: null,
 	email: null,
 	login: null,
@@ -14,7 +24,7 @@ let initialState = {
 	profilePhoto: null,
 	captchaUrl: null,
 };
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action: any): initialStateType => {
 	// debugger;
 	switch (action.type) {
 		case SET_USER_DATA: {
@@ -30,8 +40,26 @@ const usersReducer = (state = initialState, action) => {
 			return state;
 	}
 };
+type setAuthUserDataPayloadType = {
+	userId: number;
+	email: string;
+	login: string;
+	isAuth: boolean;
+	captchaUrl: string;
+};
 
-export const setAuthUserData = (userId, email, login, isAuth, captchaUrl) => ({
+type setAuthUserDataActionType = {
+	type: typeof SET_USER_DATA;
+	payload: setAuthUserDataPayloadType;
+};
+
+export const setAuthUserData = (
+	userId: number,
+	email: string,
+	login: string,
+	isAuth: boolean,
+	captchaUrl: boolean
+): setAuthUserDataActionType => ({
 	type: SET_USER_DATA,
 	payload: { userId, email, login, isAuth, captchaUrl },
 });
