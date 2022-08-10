@@ -6,6 +6,28 @@ const SET_USER_UPDATE_PROFILE = 'SET_USER_UPDATE_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 
+type PostsType = {
+	message: string;
+	count: number;
+	img: string;
+};
+type ContactsType = {
+	github: string;
+	vk: string;
+	facebook: string;
+	instagram: string;
+	twitter: string;
+	website: string;
+	youtube: string;
+	mainLink: string;
+};
+type ProfileType = {
+	userId: number;
+	lookingForAJob: boolean;
+	fullName: string;
+	contacts: ContactsType;
+};
+
 let initialState = {
 	posts: [
 		{
@@ -23,14 +45,14 @@ let initialState = {
 			count: 20,
 			img: 'https://templates.iqonic.design/socialv/bs5/html/dist/assets/images/user/07.jpg',
 		},
-	],
-
-	profile: null,
+	] as Array<PostsType>,
+	profile: null as ProfileType | null,
 	status: '',
-	login: null,
+	login: null as string | null,
 };
+export type InitialStateType = typeof initialState;
 
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action: any): InitialStateType => {
 	switch (action.type) {
 		case ADD_POST: {
 			let newPost = {

@@ -1,6 +1,6 @@
 // import React from 'react';
 import { connect } from 'react-redux';
-import { addPostCreator } from '../../../redux/profileReducer';
+import { addPostCreator } from '../../../redux/profileReducer.ts';
 import MyPosts from './MyPosts';
 
 // export default function MyPostsContainer() {
