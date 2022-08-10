@@ -1,5 +1,13 @@
 const SEND_MESSAGE = 'SEND_MESSAGE';
-
+type UserType = {
+	name: string;
+	id: number;
+	img: string;
+};
+type MessageType = {
+	message: string;
+	id?: number;
+};
 let initialState = {
 	users: [
 		{
@@ -27,16 +35,18 @@ let initialState = {
 			id: 5,
 			img: 'https://templates.iqonic.design/socialv/bs5/html/dist/assets/images/user/07.jpg ',
 		},
-	],
+	] as Array<UserType>,
 	messageData: [
 		{ id: 1, message: 'yo' },
 		{ id: 2, message: 'Hello' },
 		{ id: 3, message: 'How are you?' },
 		{ id: 4, message: 'I am fine and you' },
 		{ id: 5, message: 'It place for some message' },
-	],
+	] as Array<MessageType>,
 };
-const messageReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const messageReducer = (state = initialState, action: any): InitialStateType => {
 	switch (action.type) {
 		case SEND_MESSAGE:
 			return {
@@ -51,7 +61,12 @@ const messageReducer = (state = initialState, action) => {
 
 export default messageReducer;
 
-export let addMessageCreator = (message) => ({
+type addMessageCreatorActionType = {
+	type: typeof SEND_MESSAGE;
+	message: string;
+};
+
+export let addMessageCreator = (message: string): addMessageCreatorActionType => ({
 	type: SEND_MESSAGE,
 	message,
 });

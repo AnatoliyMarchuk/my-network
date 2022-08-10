@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
-import { addMessageCreator } from '../../redux/messageReducer';
+import { addMessageCreator } from '../../redux/messageReducer.ts';
 import Messages from './Messages';
 let mapStateToProps = (state) => {
 	return {

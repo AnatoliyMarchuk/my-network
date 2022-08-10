@@ -4,26 +4,17 @@ const SET_USER_DATA = 'SET_USER_DATA';
 const GET_CAPTCHA_URL_SUCCESS = 'GET_CAPTCHA_URL_SUCCESS';
 const SET_USER_PROFILE_PHOTO = 'SET_USER_PROFILE_PHOTO';
 
-export type initialStateType = {
-	userId: number | null;
-	email: string | null;
-	login: string | null;
-	isAuth: boolean;
-	isFetching: boolean;
-	profilePhoto: string | null;
-	captchaUrl: string | null;
-};
-
-// debugger;
-let initialState: initialStateType = {
-	userId: null,
-	email: null,
-	login: null,
+let initialState = {
+	userId: null as number | null,
+	email: null as number | null,
+	login: null as number | null,
 	isAuth: false,
 	isFetching: false,
-	profilePhoto: null,
-	captchaUrl: null,
+	profilePhoto: null as number | null,
+	captchaUrl: null as number | null,
 };
+
+export type initialStateType = typeof initialState;
 const usersReducer = (state = initialState, action: any): initialStateType => {
 	// debugger;
 	switch (action.type) {
@@ -41,19 +32,19 @@ const usersReducer = (state = initialState, action: any): initialStateType => {
 	}
 };
 type SetAuthUserDataPayloadType = {
-	userId: number;
-	email: string;
-	login: string;
+	userId: number | null;
+	email: string | null;
+	login: string | null;
 	isAuth: boolean;
-	captchaUrl?: string;
+	captchaUrl: string | null;
 };
 
 type SetUserProfilePhotoPayloadType = {
 	profilePhoto: string | null;
 };
-type GetCaptchaUrlSuccessPayloadType = {
-	captchaUrl: string;
-};
+// type GetCaptchaUrlSuccessPayloadType = {
+// 	captchaUrl: string;
+// };
 
 type SetAuthUserDataActionType = {
 	type: typeof SET_USER_DATA;
@@ -67,15 +58,15 @@ type SetUserProfilePhotoActionType = {
 
 type GetCaptchaUrlSuccessType = {
 	type: typeof GET_CAPTCHA_URL_SUCCESS;
-	payload: GetCaptchaUrlSuccessPayloadType;
+	payload: { captchaUrl: string };
 };
 
 export const setAuthUserData = (
-	userId: number,
-	email: string,
-	login: string,
+	userId: number | null,
+	email: string | null,
+	login: string | null,
 	isAuth: boolean,
-	captchaUrl: string
+	captchaUrl: string | null
 ): SetAuthUserDataActionType => ({
 	type: SET_USER_DATA,
 	payload: { userId, email, login, isAuth, captchaUrl },
@@ -90,17 +81,23 @@ export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessTy
 });
 
 export const auth = () => {
-	return async (dispatch) => {
+	return async (dispatch: any) => {
 		const response = await authAPI.me();
 
 		if (response.resultCode === 0) {
-			let { id, login, email } = response.data;
-			dispatch(setAuthUserData(id, email, login, true));
+			let { id, login, email, captchaUrl } = response.data;
+			dispatch(setAuthUserData(id, email, login, true, captchaUrl));
 		}
 	};
 };
-export const userLogin = (setStatus, email, password, rememberMe, captcha = null) => {
-	return async (dispatch) => {
+export const userLogin = (
+	setStatus: (message: string) => {},
+	email: string,
+	password: string,
+	rememberMe: boolean,
+	captcha: any
+) => {
+	return async (dispatch: any) => {
 		const response = await authAPI.login(email, password, rememberMe, captcha);
 		// debugger;
 		if (response.resultCode === 0) {
@@ -115,7 +112,7 @@ export const userLogin = (setStatus, email, password, rememberMe, captcha = null
 	};
 };
 export const userLogout = () => {
-	return async (dispatch) => {
+	return async (dispatch: any) => {
 		const response = await authAPI.logout();
 		// debugger;
 		if (response.resultCode === 0) {
@@ -124,7 +121,7 @@ export const userLogout = () => {
 	};
 };
 export const getCaptchaUrl = () => {
-	return async (dispatch) => {
+	return async (dispatch: any) => {
 		const response = await securityAPI.getCaptchaUrl();
 		const captchaUrl = response.url;
 		dispatch(getCaptchaUrlSuccess(captchaUrl));

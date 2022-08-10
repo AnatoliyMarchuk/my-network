@@ -1,7 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import messageReducer from './messageReducer';
+import messageReducer from './messageReducer.ts';
 import sidebarReducer from './sidebarReducer';
 import profileReducer from './profileReducer';
 import usersReducer from './usersReducer';
