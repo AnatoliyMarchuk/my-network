@@ -2,14 +2,14 @@ import { usersAPI, profileAPI } from '../api/api';
 
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_USER_UPDATE_PROFILE = 'SET_USER_UPDATE_PROFILE';
+
 const SET_STATUS = 'SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 
 type PostsType = {
 	message: string;
-	count: number;
-	img: string;
+	count?: number | null;
+	img?: string | null;
 };
 type ContactsType = {
 	github: string;
@@ -21,11 +21,17 @@ type ContactsType = {
 	youtube: string;
 	mainLink: string;
 };
+type PhotosType = {
+	small: string | null;
+	large: string | null;
+};
 type ProfileType = {
 	userId: number;
 	lookingForAJob: boolean;
+	lookingForAJobDescription: string | null;
 	fullName: string;
 	contacts: ContactsType;
+	photos: PhotosType;
 };
 
 let initialState = {
@@ -70,43 +76,53 @@ const profileReducer = (state = initialState, action: any): InitialStateType => 
 			return { ...state, profile: action.profile };
 		}
 
-		case SET_USER_UPDATE_PROFILE: {
-			return { ...state, profile: action.profileData };
-		}
 		case SET_STATUS: {
 			return { ...state, status: action.status };
 		}
 		case SAVE_PHOTO_SUCCESS: {
-			return { ...state, profile: { ...state.profile, photos: action.photos } };
+			return { ...state, profile: { ...state.profile, photos: action.photos } as ProfileType };
 		}
 
 		default:
 			return state;
 	}
 };
+type AddPostCreatorType = {
+	type: typeof ADD_POST;
+	post: string;
+};
+type SetUserProfileType = {
+	type: typeof SET_USER_PROFILE;
+	profile: ProfileType;
+};
+type SetUserStatusType = {
+	type: typeof SET_STATUS;
+	status: string;
+};
+type SavePhotoSuccessType = {
+	type: typeof SAVE_PHOTO_SUCCESS;
+	photos: PhotosType;
+};
 
-export let addPostCreator = (post) => ({ type: ADD_POST, post });
+export let addPostCreator = (post: string): AddPostCreatorType => ({ type: ADD_POST, post });
 
-export let setUserProfile = (profile) => ({
+export let setUserProfile = (profile: ProfileType): SetUserProfileType => ({
 	type: SET_USER_PROFILE,
 	profile,
 });
 
-export let setUserStatus = (status) => ({
+export let setUserStatus = (status: string): SetUserStatusType => ({
 	type: SET_STATUS,
 	status,
 });
-export let savePhotoSuccess = (photos) => ({
+export let savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessType => ({
 	type: SAVE_PHOTO_SUCCESS,
 	photos,
 });
-export let setUserUpdateProfile = (photos) => ({
-	type: SAVE_PHOTO_SUCCESS,
-	photos,
-});
+
 // THUNK
-export const getUserProfile = (profileId) => {
-	return async (dispatch) => {
+export const getUserProfile = (profileId: number) => {
+	return async (dispatch: any) => {
 		const data = await usersAPI.getProfile(profileId);
 		dispatch(setUserProfile(data));
 	};
@@ -118,7 +134,7 @@ export const getUserStatus = (profileId) => {
 		dispatch(setUserStatus(data));
 	};
 };
-export const updateUserStatus = (status) => {
+export const updateUserStatus = (status: string) => {
 	return async (dispatch) => {
 		try {
 			const data = await profileAPI.updateStatus(status);
@@ -133,7 +149,7 @@ export const updateUserStatus = (status) => {
 		}
 	};
 };
-export const updateProfile = (profile, setStatus, goToEditMode) => {
+export const updateProfile = (profile: ProfileType, setStatus, goToEditMode) => {
 	return async (dispatch, getState) => {
 		const data = await profileAPI.updateProfile(profile);
 

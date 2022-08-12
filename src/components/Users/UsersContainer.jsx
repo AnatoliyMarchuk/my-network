@@ -11,7 +11,7 @@ import {
 	requestUsers,
 	unsubscribe,
 	subscribe,
-} from '../../redux/usersReducer';
+} from '../../redux/usersReducer.ts';
 import Preloader from '../../commons/loader/Preloader';
 import { compose } from 'redux';
 import {
