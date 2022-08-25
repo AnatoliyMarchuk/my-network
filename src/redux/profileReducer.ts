@@ -1,38 +1,11 @@
 import { usersAPI, profileAPI } from '../api/api';
+import { PhotosType, PostsType, ProfileType } from '../types/types';
 
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 const SET_STATUS = 'SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
-
-type PostsType = {
-	message: string;
-	count?: number | null;
-	img?: string | null;
-};
-type ContactsType = {
-	github: string;
-	vk: string;
-	facebook: string;
-	instagram: string;
-	twitter: string;
-	website: string;
-	youtube: string;
-	mainLink: string;
-};
-type PhotosType = {
-	small: string | null;
-	large: string | null;
-};
-type ProfileType = {
-	userId: number;
-	lookingForAJob: boolean;
-	lookingForAJobDescription: string | null;
-	fullName: string;
-	contacts: ContactsType;
-	photos: PhotosType;
-};
 
 let initialState = {
 	posts: [
